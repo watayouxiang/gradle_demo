@@ -135,10 +135,13 @@ public class DestinationProcessor extends AbstractProcessor {
         // 写入json到本地文件中
         // 获取 kapt 的参数 root_project_dir
         String rootDir = processingEnv.getOptions().get("root_project_dir");
+        if (rootDir == null || rootDir.isEmpty()) {
+            throw new RuntimeException("root_project_dir is null");
+        }
 
         File rootDirFile = new File(rootDir);
         if (!rootDirFile.exists()) {
-            throw new RuntimeException("root_project_dir not exist!");
+            throw new RuntimeException("root_project_dir not exist");
         }
 
         File routerFileDir = new File(rootDirFile, "router_mapping");
