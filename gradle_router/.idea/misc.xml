@@ -4,6 +4,13 @@
     <asm skipDebug="false" skipFrames="false" skipCode="false" expandFrames="false" />
     <groovy codeStyle="LEGACY" />
   </component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
+      </map>
+    </option>
+  </component>
   <component name="FindBugsConfigurable">
     <option name="make" value="true" />
     <option name="effort" value="default" />

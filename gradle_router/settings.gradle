@@ -1,2 +1,3 @@
 rootProject.name = "Gradle Router"
 include ':app'
+include ':router-gradle-plugin'

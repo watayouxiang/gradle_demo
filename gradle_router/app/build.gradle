@@ -1,5 +1,8 @@
-plugins {
-    id 'com.android.application'
+apply plugin:'com.android.application'
+apply plugin:'com.watayouxiang.router'
+
+router {
+    wikiDir getRootDir().absolutePath
 }
 
 android {
