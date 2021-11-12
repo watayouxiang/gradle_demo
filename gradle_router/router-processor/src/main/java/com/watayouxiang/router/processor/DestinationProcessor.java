@@ -128,6 +128,10 @@ public class DestinationProcessor extends AbstractProcessor {
             throw new RuntimeException("Error while create file", e);
         }
 
+        // 获取 kapt 的参数 root_project_dir
+        String rootDir = processingEnv.getOptions().get("root_project_dir");
+        System.out.println(TAG + " >>> rootDir = " + rootDir);
+
         System.out.println(TAG + " >>> process finish ...");
 
         return false;

@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.watayouxiang.router'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 router {
     wikiDir getRootDir().absolutePath
@@ -28,6 +30,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kapt {
+        arguments {
+            arg("root_project_dir", rootProject.projectDir.absolutePath)
+        }
+    }
 }
 
 dependencies {
@@ -41,6 +48,9 @@ dependencies {
 //    implementation project(':router-annotations')
 //    annotationProcessor project(':router-processor')
 
-    implementation 'com.watayouxiang.router:router-annotations:1.0.0'
-    annotationProcessor 'com.watayouxiang.router:router-processor:1.0.0'
+//    implementation 'com.watayouxiang.router:router-annotations:1.0.0'
+//    annotationProcessor 'com.watayouxiang.router:router-processor:1.0.0'
+
+    implementation project(':router-annotations')
+    kapt project(':router-processor')
 }
