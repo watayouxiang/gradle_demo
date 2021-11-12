@@ -24,3 +24,39 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+println("我是project的build.gradle")
+
+// -----------------------------------------------------------------------------------
+// 打印构建阶段task依赖关系及输出输入
+// -----------------------------------------------------------------------------------
+
+// 打印构建阶段task依赖关系及输出输入
+afterEvaluate { project ->
+    // 收集所有project的task集合
+    Map<Project, Set<Task>> allTasks = project.getAllTasks(true)
+    // 遍历每一个project下的task集合
+    allTasks.entrySet().each { projTask ->
+        projTask.value.each { task ->
+            // 输出task的名称 和dependOn依赖
+            System.out.println(task.getName())
+            for (Object o : task.getDependsOn()) {
+                System.out.println("dependOn-->" + o.toString())
+            }
+
+            // 打印每个任务的输入，输出
+            for (File file : task.getInputs().getFiles().getFiles()) {
+                System.out.println("input-->" + file.getAbsolutePath())
+            }
+            for (File file : task.getOutputs().getFiles().getFiles()) {
+                System.out.println("output-->" + file.getAbsolutePath())
+            }
+
+            System.out.println("----------------------------------------")
+        }
+    }
+}
+
+// 相当于上面写法
+this.project.afterEvaluate {
+}

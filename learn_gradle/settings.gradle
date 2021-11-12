@@ -1,2 +1,77 @@
 rootProject.name = "Learn Gradle"
 include ':app'
+
+// -----------------------------------------------------------------------------------
+// 添加 构建的生命周期 监听
+// -----------------------------------------------------------------------------------
+
+gradle.addBuildListener(new BuildAdapter(){
+    @Override
+    void settingsEvaluated(Settings settings) {
+        super.settingsEvaluated(settings)
+        println("project 初始化阶段完成")
+    }
+
+    @Override
+    void projectsEvaluated(Gradle gradle) {
+        super.projectsEvaluated(gradle)
+        println("project 配置阶段完成")
+
+        gradle.rootProject.childProjects.each {name, proj ->
+            println("module名称是 $name, 路径是 ${proj.getProjectDir()}")
+        }
+    }
+
+    @Override
+    void buildFinished(BuildResult result) {
+        super.buildFinished(result)
+        println("project 构建结束")
+    }
+})
+
+println("我的项目路径：${rootProject.projectDir}")
+
+// -----------------------------------------------------------------------------------
+// 监听构建生命周期回调
+// -----------------------------------------------------------------------------------
+
+gradle.buildStarted {
+    println "项目构建开始..."
+}
+
+// 1、初始化阶段：执行项目根目录下的 setting.gradle 文件，分析哪些 project 参与本次构建
+gradle.projectsLoaded {
+    println "从 setting.gradle 解析完成参与构建的所有项目"
+}
+
+// 2、配置阶段：加载所有参与本次构建项目下的 build.gradle 文件，会将 build.gradle 文件解析
+//    并实例化为一个 Gradle 的 Project 对象，然后分析 Project 之间的依赖关系，分析 Project 下的
+//    Task 之间的依赖关系，生成有向无环拓扑结构图 TaskGraph
+gradle.beforeProject { proj ->
+    println "${proj.name} build.gradle 解析之前"
+}
+gradle.afterProject { proj ->
+    println "${proj.name} build.gradle 解析完成"
+}
+gradle.projectsEvaluated {
+    println "所有项目的 build.gradle 解析配置完成"
+}
+
+// 3、执行阶段：这是 Task 真正被执行的阶段，Gradle 会根据依赖关系决定哪些 Task 需要被执行，以及执行的先后顺序。
+//    Task 是 Gradle 中的最小执行单元，我们所有的构建、编译、打包、debug 都是执行了一个或者多个 Task，
+//    一个 Project 可以有多个 Task，Task 之间可以互相依赖。
+gradle.getTaskGraph().addTaskExecutionListener(new TaskExecutionListener() {
+    @Override
+    void beforeExecute(Task task) {
+        println("任务执行：start" + task.name)
+    }
+
+    @Override
+    void afterExecute(Task task, TaskState taskState) {
+        println("任务执行：end" + task.name)
+    }
+})
+
+gradle.buildFinished {
+    println "项目构建结束..."
+}

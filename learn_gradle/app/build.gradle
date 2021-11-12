@@ -35,3 +35,26 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
+
+apply from: project.rootProject.file("other.gradle")
+
+println("我是module的build.gradle")
+
+//task testTask() {
+//    println("我是app module中的任务")
+//}
+
+task testTask() {
+    doLast {
+        println("我是 testTask 任务")
+    }
+}
+
+task test2() {
+    dependsOn testTask
+    doLast {
+        println("我是 test2 任务")
+    }
+}
+
+println("我是app module，我的路径是：${project.projectDir}")
