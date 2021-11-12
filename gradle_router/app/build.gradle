@@ -38,9 +38,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    implementation project(':router-annotations')
-    annotationProcessor project(':router-processor')
+//    implementation project(':router-annotations')
+//    annotationProcessor project(':router-processor')
 
-//    implementation 'com.watayouxiang.router:router-annotations:1.0.0'
-//    annotationProcessor 'com.watayouxiang.router:router-processor:1.0.0'
+    implementation 'com.watayouxiang.router:router-annotations:1.0.0'
+    annotationProcessor 'com.watayouxiang.router:router-processor:1.0.0'
 }

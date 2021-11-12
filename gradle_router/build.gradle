@@ -2,7 +2,7 @@
 buildscript {
     repositories {
         maven {
-            url uri('repo')
+            url uri("/Users/TaoWang/Desktop/gradle_demo/gradle_router/repo")
         }
         google()
         mavenCentral()
@@ -20,7 +20,7 @@ buildscript {
 allprojects {
     repositories {
         maven {
-            url uri('repo')
+            url uri("/Users/TaoWang/Desktop/gradle_demo/gradle_router/repo")
         }
         google()
         mavenCentral()
