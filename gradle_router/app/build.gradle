@@ -1,5 +1,5 @@
-apply plugin:'com.android.application'
-apply plugin:'com.watayouxiang.router'
+apply plugin: 'com.android.application'
+apply plugin: 'com.watayouxiang.router'
 
 router {
     wikiDir getRootDir().absolutePath
@@ -40,4 +40,7 @@ dependencies {
 
     implementation project(':router-annotations')
     annotationProcessor project(':router-processor')
+
+//    implementation 'com.watayouxiang.router:router-annotations:1.0.0'
+//    annotationProcessor 'com.watayouxiang.router:router-processor:1.0.0'
 }
