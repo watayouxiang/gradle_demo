@@ -66,12 +66,12 @@ public class DestinationProcessor extends AbstractProcessor {
 
         StringBuilder builder = new StringBuilder();
 
-        builder.append("package com.watayouxiang.gradlerouter.mapping;\n\n");
+        builder.append("package com.watayouxiang.gradlerouter.mapping;\n");
         builder.append("import java.util.HashMap;\n");
         builder.append("import java.util.Map;\n\n");
-        builder.append("public class ").append(className).append(" {\n\n");
-        builder.append("    public static Map<String, String> get() {\n");
-        builder.append("        Map<String, String> mapping = new HashMap<>();\n\n");
+        builder.append("public class ").append(className).append(" {\n");
+        builder.append("\tpublic static Map<String, String> get() {\n");
+        builder.append("\t\tMap<String, String> mapping = new HashMap<>();\n");
 
 
         final JsonArray destinationJsonArray = new JsonArray();
@@ -95,8 +95,7 @@ public class DestinationProcessor extends AbstractProcessor {
             System.out.println(TAG + " >>> description = " + description);
             System.out.println(TAG + " >>> realPath = " + realPath);
 
-            builder.append("        ")
-                    .append("mapping.put(")
+            builder.append("\t\tmapping.put(")
                     .append("\"" + url + "\"")
                     .append(", ")
                     .append("\"" + realPath + "\"")
@@ -111,10 +110,9 @@ public class DestinationProcessor extends AbstractProcessor {
             destinationJsonArray.add(item);
         }
 
-        builder.append("\n");
-        builder.append("        return mapping;\n");
-        builder.append("    }\n\n");
-        builder.append("}\n");
+        builder.append("\t\treturn mapping;\n");
+        builder.append("\t}\n");
+        builder.append("}");
 
         String mappingFullClassName = "com.watayouxiang.gradlerouter.mapping." + className;
 
