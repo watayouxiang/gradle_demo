@@ -95,6 +95,7 @@ class RouterPlugin implements Plugin<Project> {
                         wikiFile.delete()
                     }
                     wikiFile.write(markdownBuilder.toString())
+                    println("RouterPlugin >>> markdownBuilder：${markdownBuilder.toString()}")
                 }
             }
             // 测试 MD文档 是否生成
