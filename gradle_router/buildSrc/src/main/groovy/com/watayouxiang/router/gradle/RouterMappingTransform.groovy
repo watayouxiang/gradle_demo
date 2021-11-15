@@ -109,19 +109,19 @@ class RouterMappingTransform extends Transform {
         jarOutputStream.close()
         fos.close()
 
-/*
-验证：
-$ ./gradlew clean
-$ ./gradlew :app:assembleDebug -q
+        /*
+        验证：
+        $ ./gradlew clean
+        $ ./gradlew :app:assembleDebug -q
 
-日志输出：RouterMappingTransform mappingJarFile = app/build/intermediates/transforms/RouterMappingTransform/debug/48.jar
-查看build目录：app/build/intermediates/transforms/RouterMappingTransform/debug/48.jar
+        日志输出：RouterMappingTransform mappingJarFile = app/build/intermediates/transforms/RouterMappingTransform/debug/48.jar
+        查看build目录：app/build/intermediates/transforms/RouterMappingTransform/debug/48.jar
 
-$ cd /Users/TaoWang/Desktop/gradle_demo/gradle_router/app/build/intermediates/transforms/RouterMappingTransform/debug
-// 将 48.jar 解压到 48
-$ unzip 48.jar -d 48
+        $ cd /Users/TaoWang/Desktop/gradle_demo/gradle_router/app/build/intermediates/transforms/RouterMappingTransform/debug
+        // 将 48.jar 解压到 48
+        $ unzip 48.jar -d 48
 
-查看解压后的 RouterMapping.class 代码，验证正确性
- */
+        查看解压后的 RouterMapping.class 代码，验证正确性
+         */
     }
 }
