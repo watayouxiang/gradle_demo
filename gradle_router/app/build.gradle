@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.watayouxiang.router'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.watayouxiang.router'
 
 router {
     wikiDir getRootDir().absolutePath
