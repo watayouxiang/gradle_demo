@@ -5,6 +5,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.watayouxiang.router.annotations.Destination;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.Writer;
 import java.util.Collections;
 import java.util.Set;
@@ -130,7 +133,29 @@ public class DestinationProcessor extends AbstractProcessor {
 
         // 获取 kapt 的参数 root_project_dir
         String rootDir = processingEnv.getOptions().get("root_project_dir");
-        System.out.println(TAG + " >>> rootDir = " + rootDir);
+
+        // 写入json到本地文件中
+        File rootDirFile = new File(rootDir);
+        if (!rootDirFile.exists()) {
+            throw new RuntimeException("root_project_dir not exist!");
+        }
+
+        File routerFileDir = new File(rootDirFile, "router_mapping");
+        if (!routerFileDir.exists()) {
+            routerFileDir.mkdir();
+        }
+
+        File mappingFile = new File(routerFileDir, "mapping_" + System.currentTimeMillis() + ".json");
+
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(mappingFile));
+            String jsonStr = destinationJsonArray.toString();
+            out.write(jsonStr);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            throw new RuntimeException("Error while writing json", e);
+        }
 
         System.out.println(TAG + " >>> process finish ...");
 
