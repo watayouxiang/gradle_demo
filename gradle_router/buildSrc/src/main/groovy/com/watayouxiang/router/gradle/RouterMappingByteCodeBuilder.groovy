@@ -24,7 +24,7 @@ public class RouterMapping {
  */
 class RouterMappingByteCodeBuilder implements Opcodes {
 
-    public static final String CLASS_NAME = "com/watayouxiang/app/mapping/RouterMapping"
+    public static final String CLASS_NAME = "com/watayouxiang/gradlerouter/mapping/RouterMapping"
 
     static byte[] get(Set<String> allMappingNames) {
         // 1、创建一个类
@@ -86,7 +86,7 @@ class RouterMappingByteCodeBuilder implements Opcodes {
         allMappingNames.each {
             methodVisitor.visitVarInsn(ALOAD, 0);
             methodVisitor.visitMethodInsn(INVOKESTATIC,
-                    "com/watayouxiang/androiddemo/mapping/$it",
+                    "com/watayouxiang/gradlerouter/mapping/$it",
                     "get", "()Ljava/util/Map;",
                     false)
             methodVisitor.visitMethodInsn(INVOKEINTERFACE,
