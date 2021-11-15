@@ -39,13 +39,12 @@ class RouterPlugin implements Plugin<Project> {
                 routerMappingDir.deleteDir()
             }
         }
+        println("RouterPlugin >>> 旧的构建产物的自动清理")
 
         // 容错处理，只处理App module，lib module则不处理
         if (!project.plugins.hasPlugin(AppPlugin)) {
             return
         }
-
-        println("i am from RouterPlugin, apply from ${project.name}")
 
         // 创建 Extension
         project.getExtensions().create("router", RouterExtension)
@@ -53,7 +52,7 @@ class RouterPlugin implements Plugin<Project> {
         // 获取 Extension
         project.afterEvaluate {
             RouterExtension extension = project["router"]
-            println("用户设置的 wikiDir 路径：${extension.wikiDir}")
+            println("RouterPlugin >>> 用户设置的wikiDir路径：${extension.wikiDir}")
 
             // 3、在 javac 任务 (compileDebugJavaWithJavac) 后，汇总生成文档
             project.tasks.findAll { task ->
@@ -61,6 +60,7 @@ class RouterPlugin implements Plugin<Project> {
             } each { task ->
                 task.doLast {
                     File routerMappingDir = new File(project.rootProject.projectDir, "router_mapping")
+                    println("RouterPlugin >>> routerMappingDir：${routerMappingDir.absolutePath}")
                     if (!routerMappingDir.exists()) {
                         return
                     }
