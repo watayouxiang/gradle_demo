@@ -2,9 +2,11 @@ apply plugin: 'groovy'
 
 repositories {
     jcenter()
+    google()
 }
 
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
+    implementation 'com.android.tools.build:gradle:4.1.3'
 }
