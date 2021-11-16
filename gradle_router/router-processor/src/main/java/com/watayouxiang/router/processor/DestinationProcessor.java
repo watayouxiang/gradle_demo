@@ -61,6 +61,8 @@ public class DestinationProcessor extends AbstractProcessor {
             return false;
         }
 
+        // ------------------ 生成 RouterMapping_xxx.class ------------------
+
         // 将要自动生成的类的类名
         String className = "RouterMapping_" + System.currentTimeMillis();
 
@@ -130,6 +132,8 @@ public class DestinationProcessor extends AbstractProcessor {
         } catch (Exception e) {
             throw new RuntimeException("Error while create file", e);
         }
+
+        // ------------------ 生成 mapping_xxx.json ------------------
 
         // 获取 kapt 的参数 root_project_dir
         String rootDir = processingEnv.getOptions().get("root_project_dir");
