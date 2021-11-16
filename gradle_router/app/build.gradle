@@ -111,7 +111,7 @@ android {
             if (variant.buildType.name.equals('release')) {
                 // ${variant.productFlavors[0].name} 渠道名称
                 // ${defaultConfig.versionName} 版本号
-                def fileName = "Demo_${variant.productFlavors[0].name}_${defaultConfig.versionName}.apk"
+                def fileName = "wtApp_${variant.productFlavors[0].name}_${defaultConfig.versionName}.apk"
                 output.outputFileName = fileName
             }
         }
