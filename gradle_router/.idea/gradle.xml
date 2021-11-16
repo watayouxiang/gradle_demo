@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/router-annotations" />
             <option value="$PROJECT_DIR$/router-gradle-plugin" />
             <option value="$PROJECT_DIR$/router-processor" />
+            <option value="$PROJECT_DIR$/router-runtime" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

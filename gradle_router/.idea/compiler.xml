@@ -25,6 +25,7 @@
       <module name="Gradle_Router.buildSrc" target="1.8" />
       <module name="Gradle_Router.router-gradle-plugin" target="1.8" />
       <module name="Gradle_Router.router-processor" target="1.8" />
+      <module name="Gradle_Router.router-runtime" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

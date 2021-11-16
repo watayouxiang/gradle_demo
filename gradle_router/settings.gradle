@@ -3,6 +3,7 @@ include ':app'
 include ':router-gradle-plugin'
 include ':router-annotations'
 include ':router-processor'
+include ':router-runtime'
 
 gradle.taskGraph.beforeTask { task ->
     println("[all-task] " + task.name)
