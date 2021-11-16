@@ -47,6 +47,9 @@ class RouterMappingTransform extends Transform {
      */
     @Override
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
+
+        // --------------- 收集 RouterMapping_xxx.class ---------------
+
         //super.transform(transformInvocation)
         // 1、遍历所有的Input
         // 2、对Input进行二次处理
@@ -82,7 +85,8 @@ class RouterMappingTransform extends Transform {
         // RouterMappingTransform all mapping class name = [RouterMapping_1617693731656, RouterMapping_1617693732873]
         println("${getName()} all mapping class name = " + collector.mappingClassName)
 
-        //-------------------------------- 使用 RouterMappingByteCodeBuilder
+        // --------------- 生成 RouterMapping.class ---------------
+
         File mappingJarFile = transformInvocation.outputProvider.getContentLocation(
                 "router_mapping",
                 getOutputTypes(),

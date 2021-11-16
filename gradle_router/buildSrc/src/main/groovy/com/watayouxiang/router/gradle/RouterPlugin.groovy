@@ -19,6 +19,8 @@ class RouterPlugin implements Plugin<Project> {
             appExtension.registerTransform(transform)
         }
 
+        // -------------------- 生成 RouterMapping.md --------------------
+
         // 1、自动帮助用户传递路径参数到注解处理器中
         //     kapt {
         //        arguments {
