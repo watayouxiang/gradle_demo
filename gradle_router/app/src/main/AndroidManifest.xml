@@ -10,6 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GradleRouter">
+
+        <meta-data
+            android:name="WT_CHANNEL"
+            android:value="${WT_CHANNEL_VALUE}" />
+
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />

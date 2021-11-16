@@ -7,6 +7,22 @@ router {
     wikiDir getRootDir().absolutePath
 }
 
+//////////////////////////////////////////
+// 获取 local.properties 中的参数
+//////////////////////////////////////////
+// KEY_ALIAS=test_wt666
+// KEY_PASSWORD=test_wt666
+// STORE_PASSWORD=test_wt666
+//////////////////////////////////////////
+Properties properties = new Properties()
+properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
+def KEY_ALIAS = properties.getProperty('KEY_ALIAS')
+def KEY_PASSWORD = properties.getProperty('KEY_PASSWORD')
+def STORE_PASSWORD = properties.getProperty('STORE_PASSWORD')
+
+println("KEY_ALIAS = $KEY_ALIAS, KEY_PASSWORD = $KEY_PASSWORD, STORE_PASSWORD = $STORE_PASSWORD")
+
 android {
     compileSdk 31
 
@@ -20,12 +36,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -33,6 +43,77 @@ android {
     kapt {
         arguments {
             arg("root_project_dir", rootProject.projectDir.absolutePath)
+        }
+    }
+
+    //////////////////////////////////////////
+    // apk 签名配置
+    //////////////////////////////////////////
+    signingConfigs {
+        test_wt666 {
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
+            storeFile file('../key/test_wt666.key')
+            storePassword STORE_PASSWORD
+        }
+    }
+
+    //////////////////////////////////////////
+    // buildTypes
+    //////////////////////////////////////////
+    buildTypes {
+        debug {
+            // 往 BuildConfig.java 中添加一个字段
+            // 生成目录：build/generated/source/buildConfig/...BuildConfig.java
+            buildConfigField("String", "BUILD_TIME", "\"${System.currentTimeMillis()}\"")
+
+            // 生成目录：build/generated/res/resValues/...gradleResValues.xml
+            resValue("string", "greeting", "hello!")
+
+            signingConfig signingConfigs.test_wt666
+        }
+        release {
+            // 往 BuildConfig.java 中添加一个字段
+            // 生成目录：build/generated/source/buildConfig/...BuildConfig.java
+            // 这里之所以也添加，目的是预防编译报错
+            buildConfigField("String", "BUILD_TIME", "\"0\"")
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.test_wt666
+        }
+    }
+
+    //////////////////////////////////////////
+    // Build Variants
+    //////////////////////////////////////////
+    // 产品维度
+    flavorDimensions "channel"
+    // 产品风味
+    productFlavors {
+        // 开发专用的构建变体
+        dev {
+            minSdkVersion 21
+        }
+        huawei {
+            manifestPlaceholders = [WT_CHANNEL_VALUE: "huawei"]
+        }
+        xiaomi {
+            manifestPlaceholders = [WT_CHANNEL_VALUE: "baidu"]
+        }
+    }
+
+    //////////////////////////////////////////
+    // 修改apk名字
+    //////////////////////////////////////////
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            if (variant.buildType.name.equals('release')) {
+                // ${variant.productFlavors[0].name} 渠道名称
+                // ${defaultConfig.versionName} 版本号
+                def fileName = "Demo_${variant.productFlavors[0].name}_${defaultConfig.versionName}.apk"
+                output.outputFileName = fileName
+            }
         }
     }
 }

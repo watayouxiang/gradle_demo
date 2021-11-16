@@ -1,1 +1,0 @@
-[{"url":"router://page-home","description":"应用主页","realPath":"com.watayouxiang.gradlerouter.MainActivity"},{"url":"router://page-user","description":"用户信息","realPath":"com.watayouxiang.gradlerouter.UserActivity"},{"url":"router://watayouxiang/profile","description":"个人信息","realPath":"com.watayouxiang.gradlerouter.ProfileActivity"}]
